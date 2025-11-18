@@ -1,85 +1,59 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterView } from 'vue-router'
+import { useWindowScroll } from '@vueuse/core'
+
+// Mengambil posisi scroll Y untuk efek navbar
+const { y } = useWindowScroll()
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="bg-medan-cream text-medan-dark min-h-screen font-sans">
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <!-- Navbar (Sticky & Adaptive) -->
+    <nav :class="[
+        'fixed top-0 w-full z-50 transition-all duration-500 ease-in-out px-6 py-4',
+        y > 50 ? 'bg-white/90 backdrop-blur-md shadow-lg border-b border-gray-100/50 py-3' : 'bg-transparent pt-6'
+    ]">
+      <div class="container mx-auto flex justify-between items-center">
+        <!-- Logo -->
+        <div class="flex items-center gap-2 group cursor-pointer select-none">
+            <div class="w-10 h-10 bg-medan-dark text-medan-gold rounded-full flex items-center justify-center font-serif text-xl font-bold shadow-lg group-hover:bg-medan-accent transition-colors duration-300">
+                M
+            </div>
+            <span :class="['font-serif font-bold text-xl tracking-wide transition-colors duration-300', y > 50 ? 'text-medan-dark' : 'text-white']">
+                Medan<span class="text-medan-accent">Culinary</span>
+            </span>
+        </div>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+        <!-- Menu Desktop -->
+        <div class="hidden md:flex items-center space-x-8">
+           <a href="#home" :class="['text-sm font-medium tracking-wider hover:text-medan-accent transition-colors', y > 50 ? 'text-gray-600' : 'text-gray-200']">Home</a>
+           <a href="#list" :class="['text-sm font-medium tracking-wider hover:text-medan-accent transition-colors', y > 50 ? 'text-gray-600' : 'text-gray-200']">Daftar Kuliner</a>
+           <button class="px-5 py-2 rounded-full bg-medan-accent text-white text-sm font-bold shadow-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 hover:shadow-orange-500/20">
+              Jelajah Sekarang
+           </button>
+        </div>
+      </div>
+    </nav>
 
-  <RouterView />
+    <!-- Router View (Halaman HomeView akan muncul di sini) -->
+    <RouterView />
+
+    <!-- Footer -->
+    <footer class="bg-medan-dark text-white py-16 relative overflow-hidden mt-auto">
+        <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h2 class="font-serif text-3xl font-bold mb-6">Sudah siap berburu rasa?</h2>
+            <div class="w-16 h-1 bg-medan-accent mx-auto mb-8 rounded-full"></div>
+            <p class="text-gray-400 text-xs tracking-widest uppercase">
+                &copy; 2025 Kuliner Medan Guide. Dibuat dengan Vue 3 & Tailwind.
+            </p>
+        </div>
+    </footer>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
+<style>
+/* Global styles jika diperlukan */
+html { scroll-behavior: smooth; }
 </style>

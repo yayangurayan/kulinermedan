@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Base Styles */
+@layer base {
+  body {
+    @apply antialiased text-gray-800 bg-medan-cream;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Custom Components */
+@layer components {
+  .btn-primary {
+    @apply px-6 py-2 bg-medan-accent text-white rounded-full hover:bg-orange-600 transition-all duration-300 shadow-lg;
+  }
+}

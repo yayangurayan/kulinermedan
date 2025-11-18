@@ -12,12 +12,27 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      // Lazy loading untuk performa lebih baik
       component: () => import('../views/AboutView.vue'),
     },
   ],
+  // Menambahkan behavior scroll yang halus
+  scrollBehavior(to, from, savedPosition) {
+    // Jika ada hash (#list, #home), scroll ke elemen tersebut
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+        top: 80, // Memberi jarak dari navbar
+      }
+    }
+    // Jika posisi tersimpan (tombol back), gunakan itu
+    if (savedPosition) {
+      return savedPosition
+    }
+    // Default: scroll ke paling atas
+    return { top: 0 }
+  },
 })
 
 export default router
