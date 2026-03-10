@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  // Pastikan content mencakup semua file vue/js
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",

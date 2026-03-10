@@ -5,7 +5,10 @@
 /* Custom Base Styles */
 @layer base {
   body {
-    @apply antialiased text-gray-800 bg-medan-cream;
+    /* Hapus bg-medan-cream dari @apply untuk fix error build */
+    @apply antialiased text-gray-800;
+    /* Gunakan cara ini untuk memanggil warna custom di base layer */
+    background-color: theme('colors.medan-cream');
   }
 
   h1, h2, h3, h4, h5, h6 {
